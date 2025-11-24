@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
     },
     {
       imagePath: './static/images/gstlora_1d_samples/sample4.jpg',
-      prompt: 'Add makeup his face',
+      prompt: 'Apply makeup to him',
       numFrames: 43
     },
     {
