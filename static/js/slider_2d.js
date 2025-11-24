@@ -109,6 +109,8 @@ class Slider2D {
         
         if (slider) {
           slider.addEventListener('input', (e) => this.handleSliderChange(e, sampleIndex, instrIndex));
+          // Initialize the slider color and style
+          this.initializeSliderStyle(sampleIndex, instrIndex);
           // Initialize the image
           this.updateImage(sampleIndex);
         }
@@ -122,6 +124,33 @@ class Slider2D {
         }
       });
     });
+  }
+  
+  initializeSliderStyle(sampleIndex, instrIndex) {
+    const slider = document.getElementById(`slider2d_${sampleIndex}_${instrIndex}`);
+    if (!slider) return;
+    
+    const color = slider.dataset.color;
+    const value = parseInt(slider.value);
+    const percentage = (value / 6) * 100;
+    
+    // Set initial background
+    slider.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${percentage}%, #e9ecef ${percentage}%, #e9ecef 100%)`;
+    
+    // Create style for thumb color
+    const style = document.createElement('style');
+    style.id = `slider-style-${sampleIndex}-${instrIndex}`;
+    style.textContent = `
+      #slider2d_${sampleIndex}_${instrIndex}::-webkit-slider-thumb {
+        background: ${color};
+        box-shadow: 0 2px 8px ${color}66;
+      }
+      #slider2d_${sampleIndex}_${instrIndex}::-moz-range-thumb {
+        background: ${color};
+        box-shadow: 0 2px 8px ${color}66;
+      }
+    `;
+    document.head.appendChild(style);
   }
   
   stepSlider(sampleIndex, instrIndex, direction) {
@@ -230,8 +259,8 @@ document.addEventListener('DOMContentLoaded', function() {
       imagePath: './static/images/gstlora_2d_samples/sample2.jpg',
       prompt: 'Make him old and make him laugh',
       instructions: [
-        { text: 'Age', fullText: 'make him old', color: '#4ECDC4' },
-        { text: 'Laughter', fullText: 'make him laugh', color: '#FF6B6B' }
+        { text: 'Age', fullText: 'make him old', color: '#95E1D3' },
+        { text: 'Laughter', fullText: 'make him laugh', color: '#F38181' }
       ]
     }
   ];
