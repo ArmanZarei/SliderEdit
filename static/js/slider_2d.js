@@ -259,8 +259,8 @@ document.addEventListener('DOMContentLoaded', function() {
       imagePath: './static/images/gstlora_2d_samples/sample2.jpg',
       prompt: 'Make him old and make him laugh',
       instructions: [
-        { text: 'Age', fullText: 'make him old', color: '#95E1D3' },
-        { text: 'Laughter', fullText: 'make him laugh', color: '#F38181' }
+        { text: 'Age', fullText: 'make him old', color: '#4ECDC4' },
+        { text: 'Laughter', fullText: 'make him laugh', color: '#FF6B6B' }
       ]
     }
   ];
