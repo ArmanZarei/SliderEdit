@@ -212,4 +212,6 @@ section.banner {
 
 #results-carousel .item img {
   max-width: 90% !important;
+  margin-top: 15px;
+  margin-bottom: 8px;
 }

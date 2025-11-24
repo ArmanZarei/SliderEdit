@@ -11,6 +11,7 @@
     <meta property="og:image:height" content="630" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     
     <title>SliderEdit: Continuous Image Editing with Fine-Grained Instruction Control</title>
 
@@ -24,7 +25,7 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="./static/css/index.css">
-    <link rel="icon" href="./static/images/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
     <link rel="stylesheet" href="juxtapose/css/juxtapose.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -33,15 +34,41 @@
     <script src="./static/js/bulma-slider.min.js"></script>
     <script src="./static/js/index.js"></script>
     <script src="./static/js/magnifier.js"></script>
+    <script src="./static/js/interactive_slider.js"></script>
     <link href="https://fonts.cdnfonts.com/css/menlo" rel="stylesheet">
     <link rel="stylesheet" href="./static/css/image_card_fader.css">
     <link rel="stylesheet" href="./static/css/image_card_slider.css">
+    <link rel="stylesheet" href="./static/css/interactive_slider.css">
+    <link rel="stylesheet" href="./static/css/slider_2d.css">
+
+    <style>
+.toggle-container {
+    width: 100%;
+    margin: 10px 0;
+    background: #f5f5f5;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.toggle-header {
+  cursor: pointer;
+  font-weight: bold;
+  color: #777777;
+  user-select: none;
+}
+
+.toggle-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease-out;
+}
+    </style>
 
 </head>
 
 <body>
   <section class="hero banner">
-  <div class="hero-body">
+  <div class="hero-body" style="padding-bottom: 1rem;">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
@@ -78,7 +105,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="#"
+                <a href="https://arxiv.org/abs/2511.09715"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -87,7 +114,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="#"
+                <a href="https://arxiv.org/abs/2511.09715"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -102,7 +129,7 @@
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code (Comingg Soon)</span>
+                  <span>Code (Coming Soon)</span>
                   </a>
               </span>
               <span class="link-block">
@@ -124,28 +151,195 @@
 
 
 
-
+<!-- Interactive Slider Gallery Section -->
+<section class="interactive-slider-section">
+  <div class="container">
+    <!-- <h2 class="section-title">Interactive Continuous Control</h2> -->
+    <!-- <p class="section-subtitle">Explore fine-grained edit control with our interactive slider interface</p> -->
+    <div id="interactiveSliderGallery"></div>
+  </div>
+</section>
 
 
 <section class="section">
-
   <div class="container is-max-desktop">
     <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered" style="margin-top: 50px;">
+  <div class="content has-text-centered">
+
+    <img src="./static/images/teasor.jpg" width="100%">
+    <p style="text-align: justify;"><b>SliderEdit produces continuous edit trajectories in state-of-the-art instruction-based image editing models.</b> Our method provides fine-grained and disentangled control over the intensity of edit attributes described in an instruction, allowing continuous transitions between editing strengths. Despite its effectiveness, SliderEdit is extremely lightweight and can be trained efficiently to transform a state-of-the-art instruction-based image editing model into a continuously controllable editing framework.</p>
+  </div>
+    <div class="columns is-centered has-text-centered" style="margin-top: 30px;">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Coming Soon...</h2>
+        <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
+          <p>
+            Instruction-based image editing models have recently achieved impressive performance, enabling complex edits to an input image from a multi-instruction prompt. However, these models apply each instruction in the prompt with a fixed strength, limiting the user's ability to precisely and continuously control the intensity of individual edits.
+We introduce <b>SliderEdit</b>, a framework for continuous image editing with fine-grained, interpretable instruction control. Given a multi-part edit instruction, SliderEdit disentangles the individual instructions and exposes each as a globally trained slider, allowing smooth adjustment of its strength. Unlike prior works that introduced slider-based attribute controls in text-to-image generation, typically requiring separate training or fine-tuning for each attribute or concept, our method learns a <i>single</i> set of low-rank adaptation matrices that generalize across diverse edits, attributes, and compositional instructions. This enables continuous interpolation along individual edit dimensions while preserving both spatial locality and global semantic consistency. We apply SliderEdit to state-of-the-art image editing models, including FLUX-Kontext and Qwen-Image-Edit, and observe substantial improvements in edit controllability, visual consistency, and user steerability. 
+To the best of our knowledge, we are the first to explore and propose a framework for continuous, fine-grained instruction control in instruction-based image editing models. Our results pave the way for interactive, instruction-driven image manipulation with continuous and compositional control.
+          </p>
         </div>
       </div>
     </div>
     <!--/ Abstract. -->
+
+  </div>
+</section>
+
+
+<section class="section">
+  
+    <!--/ Matting. -->
+    <div class="container is-max-desktop">
+    
+    <!-- Latent space editing applications -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+
+        <div class="content has-text-centered">
+          <img src="./static/images/method.jpg" width="95%">
+        </div>
+
+        <!-- Prompt Interpolation image -->
+        
+        
+        <div class="content has-text-justified">
+          <p>
+            Given an input image $X_\text{orig}$ and a prompt $\mathcal{P} = \{ \mathcal{P}_1, ..., \mathcal{P}_K \}$ containing $K$ edit instructions, a base image editing model produces an edited output $X_\text{editted}^{\mathcal{P}_1, ..., \mathcal{P}_K}$ where all edits are applied simultaneously. Our objective is to learn a flexible adapter $M_\theta(\mathcal{P}_i)$ capable of suppressing or modulating a specific instruction $\mathcal{P}_i$ within $\mathcal{P}$. When this adapter is activated, the model should generate $X_\text{editted}^{\mathcal{P}_1, ..., \mathcal{P}_{i-1}, \mathcal{P}_{i+1} ,...,\mathcal{P}_K}$, effectively removing the influence of $\mathcal{P}_i$ while keeping other edits intact. 
+          </p>
+          <div class="toggle-container">
+  <div class="toggle-header"><i class="far fa-arrow-alt-circle-right"></i> More details</div>
+    <div class="toggle-content">
+          <p class="mt-3">
+            <b>Partial Prompt Suppression Loss.</b> To train $M_\theta$, we propose the Partial Prompt Suppression (PPS) objective. Using the frozen base model $\epsilon(Z, X, P)$, where $Z$ denotes the noisy latents, $X$ the original image latents, and $P$ the text prompt, we first perform a forward pass with the prompt excluding the $i$-th instruction $\mathcal{P}_i$. We then require that the adapted model $\epsilon_{M_\theta(\mathcal{P}_i)}$, when given the full prompt, produces an equivalent denoising direction: 
+          </p>
+          <p>
+            \[
+\mathcal{L}_\texttt{PPS} = \|\epsilon_{M_\theta(\mathcal{P}_i)}(Z, X_\text{orig}, \mathcal{P}) -\epsilon(Z, X_\text{orig}, \mathcal{P}-\{\mathcal{P}_i\}) \|
+\]
+          </p>
+          <p>Intuitively, this objective teaches the adapter to neutralize the representation of the tokens corresponding to $\mathcal{P}_i$ throughout the model so that their visual effect disappears.</p>
+          <p><b>STLoRA and GSTLoRA</b>
+We instantiate $M_\theta$ as a Selective Token LoRA (STLoRA)—a lightweight, token-aware adapter.
+STLoRA learns low-rank updates for selected linear projections in the model but applies them <i>only</i> to the embeddings of target tokens corresponding to the suppressed instruction $\mathcal{P}_i$. While STLoRA effectively handles both single- and multi-instruction prompts by selectively modulating tokens corresponding to each instruction $\mathcal{P}_i$, we introduce Globally Selective Token LoRA (GSTLoRA) for the single-instruction setting. In this variant, all token embeddings (both text and image) are included in the adaptation, allowing LoRA updates to be applied globally across the representation space. This design provides stronger control and often yields higher-fidelity edits when manipulating a single instruction, as the update can leverage global context rather than being limited to a subset of intermediate text token embeddings. </p>
+          <p><b>Continuous Control via Scaling STLoRA</b>
+Once trained, the LoRA adapter naturally supports continuous control through its scaling parameter.
+We denote $M_\theta^\alpha$ as the adapter with scaled updates $\alpha \Delta W_\ell$ for each layer.
+By varying $\alpha$ within a predefined range $[\alpha_\text{min}, \alpha_\text{max}]$, we obtain a smooth continuum of effects—from complete suppression ($\alpha = 1$) to full application ($\alpha = 0$), and even exaggerated edits for $\alpha < 0$.</p>
+        </div>
+    </div>
+  </div>
+          
+        
+
+        <div class="content has-text-centered">
+          <img src="./static/images/algo.jpg" width="100%">
+        </div>
+        <br>
+
+        <!-- Prompt Interpolation image -->
+        <h3 class="title is-4 has-text-centered">Results</h3>
+        <br>
+
+        <div class="container is-max-desktop has-text-centered">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide3.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide1.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide2.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide4.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide5.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide6.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide7.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide8.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide9.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide10.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide11.jpg"
+              class="interpolation-image"/>
+            </div>
+            <div class="item item-t2i1">
+              <img id="myt2i0" src="./static/images/results_slider/slide12.jpg"
+              class="interpolation-image"/>
+            </div>
+          </div>
+          <p><b>Qualitative Samples of GSTLoRA.</b> Demonstrates smooth, continuous control over the strength of both local and global edits.</p>
+        </div>
+        <br><br>
+        
+
+        <h5 class="title is-5 has-text-centered" style="margin-bottom: 10px;">Interactive 2D Control for Multi-Instruction Edits</h5>
+        <div class="slider-2d-section">
+          <div id="slider2dGallery"></div>
+        </div>
+        <div class="content has-text-centered">
+          <p style="text-align: justify;"><b>Qualitative Samples of STLoRA on Multi-Instruction Edits.</b> SliderEdit produces a disentangled and smooth interpolation space in multi-instruction editing scenarios, offering fine control over individual instruction directions.</p>
+        </div>
+        <br><br>
+
+        
+        
+        <div class="content has-text-centered">
+          <img src="./static/images/multi_subject_personalization_wide.jpg" width="90%">
+          <p style="text-align: justify;"><b>Controllable zero-shot multi-subject personalization with STLoRA.</b> STLoRA enables smooth adjustment of each instruction’s strength to generate coherent, evolving image sequences, supporting story-like visual editing. (Best viewed from top-left to top-right, then bottom-right to bottom-left)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div>
 </section>
 
 
 
 
+<section class="section" id="BibTeX" style="padding-top: 15px !important;">
+  <div class="container is-max-desktop content">
+    <h2 class="title"><a id="bibtex">BibTeX</a></h2>
+    <pre><code>@article{zarei2025slideredit,
+  title={SliderEdit: Continuous Image Editing with Fine-Grained Instruction Control},
+  author={Zarei, Arman and Basu, Samyadeep and Pournemat, Mobina and Nag, Sayan and Rossi, Ryan and Feizi, Soheil},
+  journal={arXiv preprint arXiv:2511.09715},
+  year={2025}
+}</code></pre>
+  </div>
+</section>
+
+
+
 <script src="juxtapose/js/juxtapose.js"></script>
+<script src="./static/js/slider_2d.js"></script>
+
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -159,6 +353,24 @@ MathJax = {
 };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script>
+  document.querySelectorAll(".toggle-container").forEach(container => {
+    const header = container.querySelector(".toggle-header");
+    const content = container.querySelector(".toggle-content");
+
+    header.addEventListener("click", () => {
+      if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        header.innerHTML = "<i class=\"far fa-arrow-alt-circle-right\"></i> More details";
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        header.innerHTML = "<i class=\"far fa-arrow-alt-circle-down\"></i> Less details";
+      }
+    });
+  });
+</script>
+
 
 </body>
 </html>
