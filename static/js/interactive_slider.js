@@ -282,12 +282,12 @@ document.addEventListener('DOMContentLoaded', function() {
     {
       imagePath: './static/images/gstlora_1d_samples/sample5.jpg',
       prompt: 'Make her hair curly',
-      numFrames: 50
+      numFrames: 28
     },
     {
       imagePath: './static/images/gstlora_1d_samples/sample2_new.jpg',
       prompt: 'Upgrade the car\'s design to a sports car',
-      numFrames: 38
+      numFrames: 30
     },
     {
       imagePath: './static/images/gstlora_1d_samples/sample6.jpg',
