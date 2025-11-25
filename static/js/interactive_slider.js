@@ -285,9 +285,9 @@ document.addEventListener('DOMContentLoaded', function() {
       numFrames: 50
     },
     {
-      imagePath: './static/images/gstlora_1d_samples/sample2.jpg',
+      imagePath: './static/images/gstlora_1d_samples/sample2_new.jpg',
       prompt: 'Upgrade the car\'s design to a sports car',
-      numFrames: 37
+      numFrames: 38
     },
     {
       imagePath: './static/images/gstlora_1d_samples/sample6.jpg',
