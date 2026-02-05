@@ -121,8 +121,8 @@ Below are example checkpoints from models trained using the above configurations
 
 ```bash
 mkdir -p checkpoints
-gdown 1YHrHhSeKovEPGpFgFbv0iPL67YRgg6rG -O checkpoints # GSTLoRA iter500
-gdown 1PdORTgzFzfGGbNAoPQb0T5su3t82xErY -O checkpoints # STLoRA iter1200
+gdown 1YHrHhSeKovEPGpFgFbv0iPL67YRgg6rG -O checkpoints/ # GSTLoRA iter500
+gdown 1PdORTgzFzfGGbNAoPQb0T5su3t82xErY -O checkpoints/ # STLoRA iter1200
 ```
 
 Example results:
