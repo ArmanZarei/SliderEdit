@@ -1,0 +1,42 @@
+tracker_name: slider-edit
+wandb_run_name: "gstlora_flux_kontext"
+
+output_dir: "./experiments/gstlora_flux_kontext"
+
+pretrained_model_name_or_path: "black-forest-labs/FLUX.1-Kontext-dev"
+
+dataset_name: "UCSC-VLAA/HQ-Edit"
+
+seed: 0
+checkpointing_steps: 100
+validation_steps: 100
+validation_prompts:
+  - "make the skin of the person dark"
+  - "make the hair of the person curly"
+  - "make the person smile"
+  - "make the person cry"
+  - "add makeup to the girl"
+  - "make the man fat"
+validation_images:
+  - "./datasets/slideredit_faces_dataset/woman_7.png"
+  - "./datasets/slideredit_faces_dataset/woman_7.png"
+  - "./datasets/slideredit_faces_dataset/asian man_18.png"
+  - "./datasets/slideredit_faces_dataset/girl_43.png"
+  - "./datasets/slideredit_faces_dataset/woman_5.png"
+  - "./datasets/slideredit_faces_dataset/asian man_15.png"
+validation_lora_scales: [-1.5, -1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1, 1.5]
+
+lora_rank: 16
+lora_dropout: 0.0
+
+resume_from_checkpoint: false
+max_train_steps: 1000
+
+lr_warmup_steps: 0
+learning_rate: 5e-5
+train_batch_size: 6
+gradient_accumulation_steps: 1
+guidance_scale: 3.5
+max_grad_norm: 1
+max_train_timesteps: 1000
+min_train_timesteps: 0

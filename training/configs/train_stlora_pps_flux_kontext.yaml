@@ -1,0 +1,75 @@
+tracker_name: slider-edit
+wandb_run_name: "stlora_pps_flux_kontext"
+
+output_dir: "./experiments/stlora_pps_flux_kontext"
+
+images_dataset_path: "./datasets/slideredit_faces_dataset"
+# Note: This is not an ideal way of constructing prompts for PPS (edits might contradict with each other, e.g., "make the person old" + "make the person young"), but it's just for a proof of concept.
+training_single_edit_prompts: 
+  - "make the person laugh"
+  - "make the person smile"
+  - "make the person cry"
+  - "make the person angry"
+  - "make the person surprised"
+  - "make the person old"
+  - "make the person young"
+  - "add wrinkles to the face"
+  - "make the skin dark"
+  - "make the skin light"
+  - "add freckles to the face"
+  - "make the skin smooth"
+  - "make the hair curly"
+  - "make the hair long"
+  - "make the hair short"
+  - "make the hair straight"
+  - "make the hair blonde"
+  - "make the hair black"
+  - "make the hair red"
+  - "make the hair brown"
+  - "make the hair gray"
+  - "make the eyes large"
+  - "make the eyes small"
+  - "make the nose big"
+  - "make the nose small"
+  - "make the lips thick"
+  - "make the lips thin"
+  - "make the eyebrows thick"
+  - "make the eyebrows thin"
+  - "add makeup to the person"
+  - "add a beard to the person"
+  - "make the person thin"
+  - "make the person fat"
+  - "add tattoos to the person"
+  - "make the cheeks chubby"
+max_num_instructions_per_prompt: 3 # PPS specific config
+
+pretrained_model_name_or_path: "black-forest-labs/FLUX.1-Kontext-dev"
+
+seed: 0
+checkpointing_steps: 100
+validation_steps: 100
+validation_prompts:
+  - ["make the skin dark", "make the person cry"]
+  - ["add makeup to the person", "make the hair curly"]
+  - ["make the person fat", "make the person laugh"]
+validation_images:
+  - "./datasets/slideredit_faces_dataset/woman_7.png"
+  - "./datasets/slideredit_faces_dataset/girl_43.png"
+  - "./datasets/slideredit_faces_dataset/asian man_15.png"
+validation_lora_scales: [-1, -0.5, 0, 0.5, 1]
+
+lora_rank: 16
+lora_dropout: 0.0
+
+resume_from_checkpoint: false
+max_train_steps: 2000
+
+lr_warmup_steps: 0
+learning_rate: 5e-5
+train_batch_size: 6
+gradient_accumulation_steps: 1
+guidance_scale: 3.5
+max_grad_norm: 1
+max_train_timesteps: 1000
+min_train_timesteps: 0
+
