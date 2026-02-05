@@ -17,6 +17,7 @@ We introduce *SliderEdit*, a framework for continuous image editing with fine-gr
     ```bash
     conda env create -f environment.yml
     conda activate slideredit
+    pip install -e .
     ```
 
 ## 🚀Quick Start
