@@ -6,7 +6,7 @@
 
 We introduce *SliderEdit*, a framework for continuous image editing with fine-grained, interpretable instruction control. Given a multi-part edit instruction, SliderEdit disentangles the individual instructions and exposes each as a globally trained slider, allowing smooth adjustment of its strength.
 
-## Setup
+## ⚙️Setup
 
 1. Clone the repository
     ```bash
@@ -19,7 +19,7 @@ We introduce *SliderEdit*, a framework for continuous image editing with fine-gr
     conda activate slideredit
     ```
 
-## Quick Start
+## 🚀Quick Start
 
 First, load the SliderEdit pipeline:
 ```python
@@ -72,7 +72,7 @@ output_image = pipe(
 
 See [`sample_inference.ipynb`](sample_inference.ipynb) for complete inference examples.
 
-## Training SliderEdit
+## 🔬Training SliderEdit
 
 ### GSTLoRA
 
