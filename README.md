@@ -80,8 +80,7 @@ The training script for GSTLoRA is available at [`train_gstlora_flux_kontext.py`
 
 To launch training:
 ```bash
-python training/train_gstlora_flux_kontext.py \
-    --config="training/configs/train_gstlora_flux_kontext.yaml"
+python training/train_gstlora_flux_kontext.py --config="training/configs/train_gstlora_flux_kontext.yaml"
 ```
 
 View training progress and slider visualizations in [this W&B report](https://wandb.ai/armanzarei/slider-edit/reports/SliderEdit-STLoRA-and-GSTLoRA-Sample-Training--VmlldzoxNTgyNjYwNQ?accessToken=kthi3nq5ebkajza4be49aeg1374i0y6a9g7alek69adb4xnawi817civqngzpfpy).
@@ -108,8 +107,7 @@ cd ..
 Then, launch training:
 
 ```bash
-python training/train_stlora_flux_kontext.py \
-    --config="training/configs/train_stlora_pps_flux_kontext.yaml"
+python training/train_stlora_flux_kontext.py --config="training/configs/train_stlora_pps_flux_kontext.yaml"
 ```
 
 View training progress and slider visualizations in [this W&B report](https://wandb.ai/armanzarei/slider-edit/reports/SliderEdit-STLoRA-and-GSTLoRA-Sample-Training--VmlldzoxNTgyNjYwNQ?accessToken=kthi3nq5ebkajza4be49aeg1374i0y6a9g7alek69adb4xnawi817civqngzpfpy).
