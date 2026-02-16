@@ -23,3 +23,7 @@ dependencies:
       - tqdm==4.67.1
       - transformers==4.53.0
       - wandb==0.21.1
+      - opencv-python==4.12.0.88
+      - lpips==0.1.4
+      - insightface==0.7.3
+      - onnxruntime==1.23.0
