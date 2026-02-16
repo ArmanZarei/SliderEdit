@@ -142,6 +142,9 @@ Example results:
 
 See [`sample_inference.ipynb`](sample_inference.ipynb) for more details.
 
+## 📊Evaluation
+
+Simply instantiate any of the `VLMEvaluator` or `FeatureDistanceEvaluator` classes from the `evaluation` module and use them to compute the corresponding scores or distances. For more details and usage examples, please refer to [`evaluation/example_evaluation.ipynb`](evaluation/example_evaluation.ipynb).
 
 ## BibTeX
 ```bibtex
