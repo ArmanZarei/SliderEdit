@@ -1,4 +1,4 @@
-name: slideredit2
+name: slideredit
 channels:
   - pytorch
   - nvidia
